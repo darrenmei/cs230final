@@ -7,6 +7,7 @@ from config.config import config
 from utils.timer import Timer
 import argparse
 import os
+import pdb
 
 parser = argparse.ArgumentParser(description='Single Shot Tracker Test')
 parser.add_argument('--version', default='v1', help='current version')
@@ -89,12 +90,13 @@ def test(choice=None):
             image_org = tracker.update(img, det[:, 2:6], args.show_image, i)
             timer.toc()
             print('{}:{}, {}, {}\r'.format(os.path.basename(saved_file_name), i, int(i*100/len(reader)), choice_str))
-            if args.show_image and not image_org is None:
-                cv2.imshow('res', image_org)
-                cv2.waitKey(1)
+            #pdb.set_trace()
+            #if args.show_image and not image_org is None:
+                #cv2.imshow('res', image_org)
+                #cv2.waitKey(1)
 
-            if args.save_video and not image_org is None:
-                vw.write(image_org)
+            #if args.save_video and not image_org is None:
+                #vw.write(image_org)
 
             # save result
             for t in tracker.tracks:
