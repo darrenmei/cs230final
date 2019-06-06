@@ -315,25 +315,25 @@ def add_extras(cfg, i, batch_norm=True):
 
 
     conv2d1 = nn.Conv2d(in_channels, 256, kernel_size=1)
-    layers += [conv2d1, nn.ReLU(inplace=True), nn.BatchNorm2d(256), nn.Dropout(p=0.1, inplace=True)]
+    layers += [conv2d1, nn.ReLU(inplace=True), nn.BatchNorm2d(256)]#, nn.Dropout(p=0.1, inplace=True)]
     flag = True
     in_channels = 256
 
     conv2d2 = nn.Conv2d(in_channels, 512, kernel_size=3, stride=2, padding=1)
-    layers+= [conv2d2, nn.ReLU(inplace=True), nn.BatchNorm2d(512), nn.Dropout(p=0.1, inplace=True)]
+    layers+= [conv2d2, nn.ReLU(inplace=True), nn.BatchNorm2d(512)]#, nn.Dropout(p=0.1, inplace=True)]
     flag = False
     in_channels = "S"
 
     in_channels = 512
     #v=128
     conv2d3 = nn.Conv2d(in_channels, 128, kernel_size=1)
-    layers += [conv2d3, nn.ReLU(inplace=True), nn.BatchNorm2d(128), nn.Dropout(p=0.1, inplace=True)]
+    layers += [conv2d3, nn.ReLU(inplace=True), nn.BatchNorm2d(128)]#, nn.Dropout(p=0.1, inplace=True)]
     flag = True
     in_channels = 128
 
     #v='S'
     conv2d4 = nn.Conv2d(in_channels, 256, kernel_size=3, stride=2, padding=1)
-    layers+= [conv2d4, nn.ReLU(inplace=True), nn.BatchNorm2d(256), nn.Dropout(p=0.1, inplace=True)]
+    layers+= [conv2d4, nn.ReLU(inplace=True), nn.BatchNorm2d(256)]#, nn.Dropout(p=0.1, inplace=True)]
     flag = False
     in_channels = "S"
 
@@ -341,37 +341,37 @@ def add_extras(cfg, i, batch_norm=True):
     in_channels = 256
     #v=128
     conv2d5 = nn.Conv2d(in_channels, 128, kernel_size=1)
-    layers += [conv2d5, nn.ReLU(inplace=True), nn.BatchNorm2d(128), nn.Dropout(p=0.1, inplace=True)]
+    layers += [conv2d5, nn.ReLU(inplace=True), nn.BatchNorm2d(128)]#, nn.Dropout(p=0.1, inplace=True)]
     flag = True
     in_channels = 128
 
     #v=256
     conv2d6 = nn.Conv2d(in_channels, 256, kernel_size=3)
-    layers += [conv2d6, nn.ReLU(inplace=True), nn.BatchNorm2d(256), nn.Dropout(p=0.1, inplace=True)]
+    layers += [conv2d6, nn.ReLU(inplace=True), nn.BatchNorm2d(256)]#, nn.Dropout(p=0.1, inplace=True)]
     flag = False
     in_channels = 256
 
     #v=128
     conv2d7 = nn.Conv2d(in_channels, 128, kernel_size=1)
-    layers += [conv2d7, nn.ReLU(inplace=True), nn.BatchNorm2d(128), nn.Dropout(p=0.1, inplace=True)]
+    layers += [conv2d7, nn.ReLU(inplace=True), nn.BatchNorm2d(128)]#, nn.Dropout(p=0.1, inplace=True)]
     flag = True
     in_channels = 128
 
     #v=256
     conv2d8 = nn.Conv2d(in_channels, 256, kernel_size=3)
-    layers += [conv2d8, nn.ReLU(inplace=True), nn.BatchNorm2d(256), nn.Dropout(p=0.1, inplace=True)]
+    layers += [conv2d8, nn.ReLU(inplace=True), nn.BatchNorm2d(256)]#, nn.Dropout(p=0.1, inplace=True)]
     flag = False
     in_channels = 256
 
     #v=128
     conv2d9 = nn.Conv2d(in_channels, 128, kernel_size=1)
-    layers += [conv2d9, nn.ReLU(inplace=True), nn.BatchNorm2d(128), nn.Dropout(p=0.1, inplace=True)]
+    layers += [conv2d9, nn.ReLU(inplace=True), nn.BatchNorm2d(128)]#, nn.Dropout(p=0.1, inplace=True)]
     flag = True
     in_channels = 128
 
     #v="S"
     conv2d10 = nn.Conv2d(in_channels, 256, kernel_size=3, stride=2, padding=1)
-    layers+= [conv2d10, nn.ReLU(inplace=True), nn.BatchNorm2d(256), nn.Dropout(p=0.1, inplace=True)]
+    layers+= [conv2d10, nn.ReLU(inplace=True), nn.BatchNorm2d(256)]#, nn.Dropout(p=0.1, inplace=True)]
     flag = False
     in_channels = "S"
 
@@ -379,16 +379,15 @@ def add_extras(cfg, i, batch_norm=True):
     in_channels = 256
     #v=128
     conv2d11 = nn.Conv2d(in_channels, 128, kernel_size=1)
-    layers += [conv2d11, nn.ReLU(inplace=True), nn.BatchNorm2d(128), nn.Dropout(p=0.1, inplace=True)]
+    layers += [conv2d11, nn.ReLU(inplace=True), nn.BatchNorm2d(128)]#, nn.Dropout(p=0.1, inplace=True)]
     flag = True
     in_channels = 128
 
     #v=256
     conv2d12 = nn.Conv2d(in_channels, 256, kernel_size=3)
-    layers += [conv2d12, nn.ReLU(inplace=True), nn.BatchNorm2d(256), nn.Dropout(p=0.1, inplace=True)]
+    layers += [conv2d12, nn.ReLU(inplace=True), nn.BatchNorm2d(256)]#, nn.Dropout(p=0.1, inplace=True)]
     flag = False
     in_channels = 256
-
 
     return layers
 
