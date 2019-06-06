@@ -292,28 +292,28 @@ def add_extras(cfg, i, batch_norm=True):
     layers = []
     in_channels = i
     flag = False
-    # for k, v in enumerate(cfg):
-    #     if in_channels != 'S':
-    #         if v == 'S':
-    #             conv2d = nn.Conv2d(in_channels, cfg[k+1],
-    #                                  kernel_size=(1, 3)[flag],
-    #                                  stride=2,
-    #                                  padding=1)
-    #             if batch_norm:
-    #                 layers += [conv2d, nn.BatchNorm2d(cfg[k+1]), nn.ReLU(inplace=True)]
-    #             else:
-    #                 layers += [conv2d, nn.ReLU(inplace=True)]
-    #         else:
-    #             conv2d = nn.Conv2d(in_channels, v,
-    #                                  kernel_size=(1, 3)[flag])
-    #             if batch_norm:
-    #                 layers += [conv2d, nn.BatchNorm2d(v), nn.ReLU(inplace=True)]
-    #             else:
-    #                 layers += [conv2d, nn.ReLU(inplace=True)]
-    #         flag = not flag
-    #     in_channels = v
+    for k, v in enumerate(cfg):
+        if in_channels != 'S':
+            if v == 'S':
+                conv2d = nn.Conv2d(in_channels, cfg[k+1],
+                                  kernel_size=(1, 3)[flag],
+                                  stride=2,
+                                  padding=1)
+                if batch_norm:
+                     layers += [conv2d, nn.BatchNorm2d(cfg[k+1]), nn.ReLU(inplace=True)]
+                else:
+                     layers += [conv2d, nn.ReLU(inplace=True)]
+            else:
+                conv2d = nn.Conv2d(in_channels, v,
+                                kernel_size=(1, 3)[flag])
+                if batch_norm:
+                    layers += [conv2d, nn.BatchNorm2d(v), nn.ReLU(inplace=True)]
+                else:
+                    layers += [conv2d, nn.ReLU(inplace=True)]
+            flag = not flag
+        in_channels = v
 
-
+    """
     conv2d1 = nn.Conv2d(in_channels, 256, kernel_size=1)
     layers += [conv2d1, nn.ReLU(inplace=True), nn.BatchNorm2d(256)]#, nn.Dropout(p=0.1)]
     flag = True
@@ -388,7 +388,7 @@ def add_extras(cfg, i, batch_norm=True):
     layers += [conv2d12, nn.ReLU(inplace=True), nn.BatchNorm2d(256)]#, nn.Dropout(p=0.1)]
     flag = False
     in_channels = 256
-
+    """
 
     return layers
 
