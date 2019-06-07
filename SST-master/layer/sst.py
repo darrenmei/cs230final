@@ -313,9 +313,9 @@ def add_extras(cfg, i, batch_norm=True):
     #         flag = not flag
     #     in_channels = v
 
-
+    
     conv2d1 = nn.Conv2d(in_channels, 256, kernel_size=1)
-    layers += [conv2d1, nn.ReLU(inplace=True), nn.BatchNorm2d(256)]#, nn.Dropout(p=0.1, inplace=True)]
+    layers += [conv2d1, nn.ReLU(inplace=True), nn.BatchNorm2d(256), nn.Dropout2d(p=0.1)]
     flag = True
     in_channels = 256
 
@@ -424,8 +424,8 @@ def selector(vgg, extra_layers, batch_normal=True):
                               kernel_size=3,
                               padding=1)]
     if batch_normal:
-        # for k, v in enumerate(extra_layers[3::6], 3):
-        for k, v in enumerate(extra_layers[4::8], 3):
+        for k, v in enumerate(extra_layers[4::6], 3):
+        #for k, v in enumerate(extra_layers[4::8], 3):
             selector_layers += [nn.Conv2d(v.out_channels,
                                  config['selector_channel'][k],
                                  kernel_size=3,
