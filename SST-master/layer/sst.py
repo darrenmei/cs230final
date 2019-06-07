@@ -277,7 +277,7 @@ def vgg(cfg, i, batch_norm=False):
         else:
             conv2d = nn.Conv2d(in_channels, v, kernel_size=3, padding=1)
             if batch_norm:
-                layers += [conv2d, nn.BatchNorm2d(v), nn.ReLU(inplace=True)]
+                layers += [conv2d, nn.ReLU(inplace=True), nn.BatchNorm2d(v)]
             else:
                 layers += [conv2d, nn.ReLU(inplace=True)]
             in_channels = v
@@ -399,7 +399,7 @@ def add_final(cfg, batch_normal=True):
     for v in cfg[1:-2]:
         conv2d = nn.Conv2d(in_channels, v, kernel_size=1, stride=1)
         if batch_normal:
-            layers += [conv2d, nn.BatchNorm2d(v), nn.ReLU(inplace=True)]
+            layers += [conv2d, nn.ReLU(inplace=True), nn.BatchNorm2d(v)]
         else:
             layers += [conv2d, nn.ReLU(inplace=True)]
         in_channels = v
