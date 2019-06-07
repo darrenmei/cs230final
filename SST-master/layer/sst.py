@@ -424,8 +424,8 @@ def selector(vgg, extra_layers, batch_normal=True):
                               kernel_size=3,
                               padding=1)]
     if batch_normal:
-        # for k, v in enumerate(extra_layers[3::6], 3):
-        for k, v in enumerate(extra_layers[4::8], 3):
+        for k, v in enumerate(extra_layers[4::6], 3):
+        #for k, v in enumerate(extra_layers[4::8], 3):
             selector_layers += [nn.Conv2d(v.out_channels,
                                  config['selector_channel'][k],
                                  kernel_size=3,
