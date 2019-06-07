@@ -191,7 +191,7 @@ class SST(nn.Module):
     def forward_extras(self, x, extras, sources):
         for k, v in enumerate(extras):
             x = v(x) #x = F.relu(v(x), inplace=True)        #done: relu is unnecessary.
-            if k % 6 == 3:                  #done: should select the output of BatchNormalization (-> k%6==2)
+            if k % 8 == 4:                  #done: should select the output of BatchNormalization (-> k%6==2)
                 sources.append(x)
         return x
 
@@ -292,102 +292,102 @@ def add_extras(cfg, i, batch_norm=True):
     layers = []
     in_channels = i
     flag = False
-    for k, v in enumerate(cfg):
-        if in_channels != 'S':
-            if v == 'S':
-                conv2d = nn.Conv2d(in_channels, cfg[k+1],
-                                  kernel_size=(1, 3)[flag],
-                                  stride=2,
-                                  padding=1)
-                if batch_norm:
-                     layers += [conv2d, nn.BatchNorm2d(cfg[k+1]), nn.ReLU(inplace=True), nn.Dropout2d(p=0.1)]
-                else:
-                     layers += [conv2d, nn.ReLU(inplace=True)]
-            else:
-                conv2d = nn.Conv2d(in_channels, v,
-                                kernel_size=(1, 3)[flag])
-                if batch_norm:
-                    layers += [conv2d, nn.BatchNorm2d(v), nn.ReLU(inplace=True), nn.Dropout2d(p=0.1)]
-                else:
-                    layers += [conv2d, nn.ReLU(inplace=True)]
-            flag = not flag
-        in_channels = v
+    # for k, v in enumerate(cfg):
+    #     if in_channels != 'S':
+    #         if v == 'S':
+    #             conv2d = nn.Conv2d(in_channels, cfg[k+1],
+    #                               kernel_size=(1, 3)[flag],
+    #                               stride=2,
+    #                               padding=1)
+    #             if batch_norm:
+    #                  layers += [conv2d, nn.BatchNorm2d(cfg[k+1]), nn.ReLU(inplace=True), nn.Dropout2d(p=0.1)]
+    #             else:
+    #                  layers += [conv2d, nn.ReLU(inplace=True)]
+    #         else:
+    #             conv2d = nn.Conv2d(in_channels, v,
+    #                             kernel_size=(1, 3)[flag])
+    #             if batch_norm:
+    #                 layers += [conv2d, nn.BatchNorm2d(v), nn.ReLU(inplace=True), nn.Dropout2d(p=0.1)]
+    #             else:
+    #                 layers += [conv2d, nn.ReLU(inplace=True)]
+    #         flag = not flag
+    #     in_channels = v
 
 
-    # conv2d1 = nn.Conv2d(in_channels, 256, kernel_size=1)
-    # layers += [conv2d1, nn.ReLU(inplace=True), nn.BatchNorm2d(256)]#, nn.Dropout(p=0.1, inplace=True)]
-    # flag = True
-    # in_channels = 256
-    #
-    # conv2d2 = nn.Conv2d(in_channels, 512, kernel_size=3, stride=2, padding=1)
-    # layers+= [conv2d2, nn.ReLU(inplace=True), nn.BatchNorm2d(512)]#, nn.Dropout(p=0.1, inplace=True)]
-    # flag = False
-    # in_channels = "S"
-    #
-    # in_channels = 512
-    # #v=128
-    # conv2d3 = nn.Conv2d(in_channels, 128, kernel_size=1)
-    # layers += [conv2d3, nn.ReLU(inplace=True), nn.BatchNorm2d(128)]#, nn.Dropout(p=0.1, inplace=True)]
-    # flag = True
-    # in_channels = 128
-    #
-    # #v='S'
-    # conv2d4 = nn.Conv2d(in_channels, 256, kernel_size=3, stride=2, padding=1)
-    # layers+= [conv2d4, nn.ReLU(inplace=True), nn.BatchNorm2d(256)]#, nn.Dropout(p=0.1, inplace=True)]
-    # flag = False
-    # in_channels = "S"
-    #
-    # #v=256
-    # in_channels = 256
-    # #v=128
-    # conv2d5 = nn.Conv2d(in_channels, 128, kernel_size=1)
-    # layers += [conv2d5, nn.ReLU(inplace=True), nn.BatchNorm2d(128)]#, nn.Dropout(p=0.1, inplace=True)]
-    # flag = True
-    # in_channels = 128
-    #
-    # #v=256
-    # conv2d6 = nn.Conv2d(in_channels, 256, kernel_size=3)
-    # layers += [conv2d6, nn.ReLU(inplace=True), nn.BatchNorm2d(256)]#, nn.Dropout(p=0.1, inplace=True)]
-    # flag = False
-    # in_channels = 256
-    #
-    # #v=128
-    # conv2d7 = nn.Conv2d(in_channels, 128, kernel_size=1)
-    # layers += [conv2d7, nn.ReLU(inplace=True), nn.BatchNorm2d(128)]#, nn.Dropout(p=0.1, inplace=True)]
-    # flag = True
-    # in_channels = 128
-    #
-    # #v=256
-    # conv2d8 = nn.Conv2d(in_channels, 256, kernel_size=3)
-    # layers += [conv2d8, nn.ReLU(inplace=True), nn.BatchNorm2d(256)]#, nn.Dropout(p=0.1, inplace=True)]
-    # flag = False
-    # in_channels = 256
-    #
-    # #v=128
-    # conv2d9 = nn.Conv2d(in_channels, 128, kernel_size=1)
-    # layers += [conv2d9, nn.ReLU(inplace=True), nn.BatchNorm2d(128)]#, nn.Dropout(p=0.1, inplace=True)]
-    # flag = True
-    # in_channels = 128
-    #
-    # #v="S"
-    # conv2d10 = nn.Conv2d(in_channels, 256, kernel_size=3, stride=2, padding=1)
-    # layers+= [conv2d10, nn.ReLU(inplace=True), nn.BatchNorm2d(256)]#, nn.Dropout(p=0.1, inplace=True)]
-    # flag = False
-    # in_channels = "S"
-    #
-    # #v=256
-    # in_channels = 256
-    # #v=128
-    # conv2d11 = nn.Conv2d(in_channels, 128, kernel_size=1)
-    # layers += [conv2d11, nn.ReLU(inplace=True), nn.BatchNorm2d(128)]#, nn.Dropout(p=0.1, inplace=True)]
-    # flag = True
-    # in_channels = 128
-    #
-    # #v=256
-    # conv2d12 = nn.Conv2d(in_channels, 256, kernel_size=3)
-    # layers += [conv2d12, nn.ReLU(inplace=True), nn.BatchNorm2d(256)]#, nn.Dropout(p=0.1, inplace=True)]
-    # flag = False
-    # in_channels = 256
+    conv2d1 = nn.Conv2d(in_channels, 256, kernel_size=1)
+    layers += [conv2d1, nn.ReLU(inplace=True), nn.BatchNorm2d(256)]#, nn.Dropout(p=0.1, inplace=True)]
+    flag = True
+    in_channels = 256
+
+    conv2d2 = nn.Conv2d(in_channels, 512, kernel_size=3, stride=2, padding=1)
+    layers+= [conv2d2, nn.ReLU(inplace=True), nn.BatchNorm2d(512)]#, nn.Dropout(p=0.1, inplace=True)]
+    flag = False
+    in_channels = "S"
+
+    in_channels = 512
+    #v=128
+    conv2d3 = nn.Conv2d(in_channels, 128, kernel_size=1)
+    layers += [conv2d3, nn.ReLU(inplace=True), nn.BatchNorm2d(128)]#, nn.Dropout(p=0.1, inplace=True)]
+    flag = True
+    in_channels = 128
+
+    #v='S'
+    conv2d4 = nn.Conv2d(in_channels, 256, kernel_size=3, stride=2, padding=1)
+    layers+= [conv2d4, nn.ReLU(inplace=True), nn.BatchNorm2d(256)]#, nn.Dropout(p=0.1, inplace=True)]
+    flag = False
+    in_channels = "S"
+
+    #v=256
+    in_channels = 256
+    #v=128
+    conv2d5 = nn.Conv2d(in_channels, 128, kernel_size=1)
+    layers += [conv2d5, nn.ReLU(inplace=True), nn.BatchNorm2d(128)]#, nn.Dropout(p=0.1, inplace=True)]
+    flag = True
+    in_channels = 128
+
+    #v=256
+    conv2d6 = nn.Conv2d(in_channels, 256, kernel_size=3)
+    layers += [conv2d6, nn.ReLU(inplace=True), nn.BatchNorm2d(256)]#, nn.Dropout(p=0.1, inplace=True)]
+    flag = False
+    in_channels = 256
+
+    #v=128
+    conv2d7 = nn.Conv2d(in_channels, 128, kernel_size=1)
+    layers += [conv2d7, nn.ReLU(inplace=True), nn.BatchNorm2d(128)]#, nn.Dropout(p=0.1, inplace=True)]
+    flag = True
+    in_channels = 128
+
+    #v=256
+    conv2d8 = nn.Conv2d(in_channels, 256, kernel_size=3)
+    layers += [conv2d8, nn.ReLU(inplace=True), nn.BatchNorm2d(256)]#, nn.Dropout(p=0.1, inplace=True)]
+    flag = False
+    in_channels = 256
+
+    #v=128
+    conv2d9 = nn.Conv2d(in_channels, 128, kernel_size=1)
+    layers += [conv2d9, nn.ReLU(inplace=True), nn.BatchNorm2d(128)]#, nn.Dropout(p=0.1, inplace=True)]
+    flag = True
+    in_channels = 128
+
+    #v="S"
+    conv2d10 = nn.Conv2d(in_channels, 256, kernel_size=3, stride=2, padding=1)
+    layers+= [conv2d10, nn.ReLU(inplace=True), nn.BatchNorm2d(256)]#, nn.Dropout(p=0.1, inplace=True)]
+    flag = False
+    in_channels = "S"
+
+    #v=256
+    in_channels = 256
+    #v=128
+    conv2d11 = nn.Conv2d(in_channels, 128, kernel_size=1)
+    layers += [conv2d11, nn.ReLU(inplace=True), nn.BatchNorm2d(128)]#, nn.Dropout(p=0.1, inplace=True)]
+    flag = True
+    in_channels = 128
+
+    #v=256
+    conv2d12 = nn.Conv2d(in_channels, 256, kernel_size=3)
+    layers += [conv2d12, nn.ReLU(inplace=True), nn.BatchNorm2d(256)]#, nn.Dropout(p=0.1, inplace=True)]
+    flag = False
+    in_channels = 256
 
     return layers
 
